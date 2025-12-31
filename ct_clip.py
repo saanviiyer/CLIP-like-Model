@@ -10,7 +10,6 @@ from torchvision import transforms
 from PIL import Image
 from sklearn.metrics import classification_report, confusion_matrix
 
-# --- 1. Dataset Class ---
 class CTDataset(Dataset):
     def __init__(self, csv_file, img_dir, transform=None):
         self.annotations = pd.read_csv(csv_file)
@@ -32,7 +31,6 @@ class CTDataset(Dataset):
             image = self.transform(image)
         return image, label
 
-# --- 2. Architecture ---
 class CTFoundationModel(nn.Module):
     def __init__(self, embed_dim=128):
         super().__init__()
@@ -50,7 +48,6 @@ class CTFoundationModel(nn.Module):
         lbl_emb = F.normalize(self.label_embedding(labels), p=2, dim=1)
         return img_emb, lbl_emb
 
-# --- 3. Setup ---
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -64,7 +61,6 @@ test_loader = DataLoader(CTDataset('test/_annotations.csv', 'test/', transform),
 model = CTFoundationModel().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
 
-# --- 4. Training Loop ---
 def train(epochs=10):
     model.train()
     for epoch in range(1, epochs + 1):
@@ -82,7 +78,6 @@ def train(epochs=10):
             total_loss += loss.item()
         print(f"Epoch {epoch} | Loss: {total_loss/len(train_loader):.4f}")
 
-# --- 5. Validation & Confusion Matrix ---
 def validate(loader, model):
     model.eval()
     all_preds, all_labels = [], []
@@ -109,6 +104,5 @@ def validate(loader, model):
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=["NSCLC", "SCLC"], yticklabels=["NSCLC", "SCLC"])
     plt.xlabel('Predicted'); plt.ylabel('Actual'); plt.show()
 
-# Run
 train(10)
 validate(test_loader, model)
