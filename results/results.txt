@@ -21,3 +21,5 @@ TEST DATASET PERFORMANCE
     accuracy       		              0.83      1701
    macro avg   	0.75      0.72      0.73      1701
 weighted avg   	0.82      0.83      0.83      1701
+
+INTERPRETATION: Model is very good at recognizing healthy cases, but not recall for SCLC can be greatly maximized.
