@@ -1,0 +1,25 @@
+
+Epoch 1 | Loss: 0.2219
+Epoch 2 | Loss: 0.1636
+Epoch 3 | Loss: 0.0902
+Epoch 4 | Loss: 0.0469
+Epoch 5 | Loss: 0.0245
+Epoch 6 | Loss: 0.0133
+Epoch 7 | Loss: 0.0089
+Epoch 8 | Loss: 0.0061
+Epoch 9 | Loss: 0.0037
+Epoch 10 | Loss: 0.0030
+
+==============================
+TEST DATASET PERFORMANCE
+==============================
+             	precision    recall  f1-score   count
+
+       NSCLC     0.88     0.91      0.89      1338
+        SCLC     0.62     0.53      0.57       363
+
+    accuracy       		              0.83      1701
+   macro avg   	0.75      0.72      0.73      1701
+weighted avg   	0.82      0.83      0.83      1701
+
+INTERPRETATION: Model is very good at recognizing healthy cases, but not recall for SCLC can be greatly maximized.
